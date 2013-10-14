@@ -1,0 +1,34 @@
+{
+  "name":         "plc",
+  "version":      "0.1.0",
+  "main":         "./lib/plc",
+  "description":  "module to connect to PLCs",
+  "author":       "Markus Kohlhase <mail@markus-kohlhase.de>",
+  "licenses":     [{"type": "LGPL"}],
+  "engines":
+  {
+    "node":       ">=0.10.x"
+  },
+  "dependencies":
+  {
+    "bits":       "~0.1.0"
+  },
+  "devDependencies":
+  {
+    "node-gyp":             "*",
+    "buster":               "~0.6.12",
+    "buster-coffee":        "~0.1.4",
+    "sinon":                "~1.7.3",
+    "coffee-script":        "~1.6.3"
+  },
+  "repository":
+  {
+    "type": "git",
+    "path": "git://github.com/flosse/node-plc.git"
+  },
+  "scripts":
+  {
+    "install":    "node-gyp configure build",
+    "test":       "npm install && coffee -c -o lib/ src/*.coffee && buster test"
+  }
+}
