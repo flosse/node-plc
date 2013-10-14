@@ -3,6 +3,10 @@
 Node.js module to communicate with PLCs.
 At the moment only the Siemens LOGO! PLC is supported.
 
+[![Build Status](https://secure.travis-ci.org/flosse/node-plc.png)](http://travis-ci.org/flosse/node-plc)
+[![Dependency Status](https://gemnasium.com/flosse/node-plc.png)](https://gemnasium.com/flosse/node-plc)
+[![NPM version](https://badge.fury.io/js/node-plc.png)](http://badge.fury.io/js/node-plc)
+
 ## Usage
 
 ```shell

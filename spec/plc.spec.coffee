@@ -1,5 +1,6 @@
 global.buster = require "buster"
 global.sinon  = require "sinon"
+pkg           = require '../package.json'
 buster.spec.expose()
 
 describe "logo", ->
@@ -12,3 +13,4 @@ describe "logo", ->
 
   it "has a version property", ->
     (expect typeof @plc.VERSION).toEqual "string"
+    (expect @plc.VERSION).toEqual pkg.version
