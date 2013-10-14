@@ -24,8 +24,9 @@
   "repository":
   {
     "type": "git",
-    "path": "git://github.com/flosse/node-plc.git"
+    "url":  "git://github.com/flosse/node-plc.git"
   },
+  "bugs":   "http://github.com/flosse/node-plc/issues",
   "scripts":
   {
     "install":    "node-gyp configure build",
