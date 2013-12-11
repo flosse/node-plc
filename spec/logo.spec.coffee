@@ -5,7 +5,7 @@ buster.spec.expose()
 describe "logo", ->
 
   before ->
-    @Logo = require "../lib/logo"
+    @Logo = require "../src/logo"
 
   it "is a class", ->
     (expect typeof @Logo).toEqual "function"

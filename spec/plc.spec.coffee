@@ -6,7 +6,7 @@ buster.spec.expose()
 describe "logo", ->
 
   before ->
-    @plc = require "../lib/plc"
+    @plc = require "../src/plc"
 
   it "contains the logo class", ->
     (expect typeof @plc.Logo).toEqual "function"
