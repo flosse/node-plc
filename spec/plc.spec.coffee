@@ -1,16 +1,12 @@
-global.buster = require "buster"
-global.sinon  = require "sinon"
-pkg           = require '../package.json'
-buster.spec.expose()
+should = require("chai").should()
+pkg    = require '../package.json'
+plc    = require "../src/plc"
 
-describe "logo", ->
-
-  before ->
-    @plc = require "../src/plc"
+describe "plc", ->
 
   it "contains the logo class", ->
-    (expect typeof @plc.Logo).toEqual "function"
+    plc.Logo.should.be.a.function
 
   it "has a version property", ->
-    (expect typeof @plc.VERSION).toEqual "string"
-    (expect @plc.VERSION).toEqual pkg.version
+    plc.VERSION.should.be.a.string
+    plc.VERSION.should.equal pkg.version

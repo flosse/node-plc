@@ -1,33 +1,31 @@
-global.buster = require "buster"
-global.sinon  = require "sinon"
-buster.spec.expose()
+should = require("chai").should()
+nodave = require("../build/Release/nodave").NoDave
 
 describe "nodave", ->
 
   before ->
-    @nodave = require("../build/Release/nodave").NoDave
 
   it "is a class", ->
-    (expect typeof @nodave).toEqual "function"
+    nodave.should.be.a.function
 
   it "takes an IP-Address as constructor argument", ->
-    (expect => new @nodave).toThrow()
-    (expect => new @nodave "192.168.0.1").not.toThrow()
-    (expect => new @nodave "x").toThrow()
-    (expect => new @nodave "192.168.234.2011").toThrow()
+    (-> new nodave).should.throw()
+    (-> new nodave "192.168.0.1").should.not.throw()
+    (-> new nodave "x").should.throw()
+    (-> new nodave "192.168.234.2011").should.throw()
 
   describe "class", ->
 
-    before -> @d = new @nodave "192.168.0.1"
+    beforeEach -> @d = new nodave "192.168.0.1"
 
     it "has a connect method", ->
-      (expect typeof @d.connect).toEqual "function"
+      @d.connect.should.be.a.function
 
     it "has a method to get markers", ->
-      (expect typeof @d.getMarkers).toEqual "function"
+      @d.getMarkers.should.be.a.function
 
     it "has a method to set markers", ->
-      (expect typeof @d.setMarkers).toEqual "function"
+      @d.setMarkers.should.be.a.function
 
     it "has a method to get inputs", ->
-      (expect typeof @d.getInputs).toEqual "function"
+      @d.getInputs.should.be.a.function

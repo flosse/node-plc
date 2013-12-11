@@ -1,60 +1,56 @@
-global.buster = require "buster"
-global.sinon  = require "sinon"
-buster.spec.expose()
+should = require("chai").should()
+Logo   = require "../src/logo"
 
 describe "logo", ->
 
-  before ->
-    @Logo = require "../src/logo"
-
   it "is a class", ->
-    (expect typeof @Logo).toEqual "function"
+    Logo.should.be.a.function
 
   describe "constructor", ->
 
     it "takes an IP Address as first argument", ->
-      (expect => new @Logo "192.168.0.1").not.toThrow()
+      (-> new Logo "192.168.0.1").should.not.throw()
 
     it "taks an option object as second argument", ->
-      (expect => new @Logo "192.168.0.1", {}).not.toThrow()
-      (expect (new @Logo "192.168.0.1", {inputs: 2}).inputs).toEqual 2
-      (expect (new @Logo "192.168.0.1", {markers: 3}).markers).toEqual 3
+      (-> new Logo "192.168.0.1", {}).should.not.throw()
+      (new Logo "192.168.0.1", {inputs: 2}).inputs.should.equal 2
+      (new Logo "192.168.0.1", {markers: 3}).markers.should.equal 3
 
     it "uses 8 inputs and 8 markers as default config", ->
-      (expect (new @Logo "192.168.0.1").inputs).toEqual 8
-      (expect (new @Logo "192.168.0.1").markers).toEqual 8
+      (new Logo "192.168.0.1").inputs.should.equal 8
+      (new Logo "192.168.0.1").markers.should.equal 8
 
   describe "Logo class", ->
 
-    before -> @logo = new @Logo "192.168.0.1"
+    beforeEach -> @logo = new Logo "192.168.0.1"
 
     it "has a connect method", ->
-      (expect typeof @logo.connect).toEqual "function"
+     @logo.connect.should.be.a.function
 
     it "has a disconnect method", ->
-      (expect typeof @logo.disconnect).toEqual "function"
+      @logo.disconnect.should.be.a.function
 
     it "has a setMarker method", ->
-      (expect typeof @logo.setMarker).toEqual "function"
+      @logo.setMarker.should.be.a.function
 
     it "has a getMarker method", ->
-      (expect typeof @logo.getMarker).toEqual "function"
+      @logo.getMarker.should.be.a.function
 
     describe "getMarkers method", ->
 
       it "is a function", ->
-        (expect typeof @logo.getMarkers).toEqual "function"
+        @logo.getMarkers.should.be.a.function
 
       it "returns null if the logo is disconnected", ->
-        (expect @logo.getMarkers()).toBe null
+        should.equal null, @logo.getMarkers()
 
     it "has a getInput method", ->
-      (expect typeof @logo.getInput).toEqual "function"
+      @logo.getInput.should.be.a.function
 
     describe "getInput method", ->
 
       it "is a function", ->
-        (expect typeof @logo.getInputs).toEqual "function"
+        @logo.getInputs.should.be.a.function
 
       it "returns null if the logo is disconnected", ->
-        (expect @logo.getInputs()).toBe null
+        should.equal null, @logo.getInputs()
