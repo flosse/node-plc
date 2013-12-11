@@ -42,8 +42,8 @@ describe "logo", ->
       it "is a function", ->
         @logo.getMarkers.should.be.a.function
 
-      it "returns null if the logo is disconnected", ->
-        should.equal null, @logo.getMarkers()
+      it "returns an error if the logo is disconnected", ->
+        @logo.getMarkers().should.be.an.Error
 
     it "has a getInput method", ->
       @logo.getInput.should.be.a.function
@@ -53,5 +53,5 @@ describe "logo", ->
       it "is a function", ->
         @logo.getInputs.should.be.a.function
 
-      it "returns null if the logo is disconnected", ->
-        should.equal null, @logo.getInputs()
+      it "returns an error if the logo is disconnected", ->
+        @logo.getInputs().should.be.an.Error

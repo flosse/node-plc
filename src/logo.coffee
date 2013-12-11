@@ -1,5 +1,5 @@
 ###
-Copyright (c) 2012-2013, Maruks Kohlhase <mail@markus-kohlhase.de>
+Copyright (c) 2012 - 2013, Markus Kohlhase <mail@markus-kohlhase.de>
 ###
 
 fs   = require "fs"
@@ -7,6 +7,8 @@ net  = require "net"
 ev   = require "events"
 dave = require "../build/Release/nodave"
 bits = require "bits"
+
+NOT_CONNECTED = "plc is not connected"
 
 class Logo extends ev.EventEmitter
 
@@ -44,12 +46,13 @@ class Logo extends ev.EventEmitter
         @emit "disconnect", ev
 
       @_socket.on "connect", =>
-        try
-          @_dave.connect @_socket._handle.fd, @timeout
+        e = @_dave.connect @_socket._handle.fd, @timeout
+        unless e instanceof Error
           @isConnected = true
           @emit "connect"
-        catch e
+        else
           @emit "error", e
+        return e
 
     @_socket.connect 102, @ipAddress
 
@@ -58,54 +61,66 @@ class Logo extends ev.EventEmitter
     @_socket?.destroy()
 
   setMarker: (m) ->
-    return null unless @isConnected
+    return new Error NOT_CONNECTED unless @isConnected
     if @_simulate
       @_simMarkers = bits.set @_simMarkers, m
     else
-      @_dave.setMarkers bits.set @_dave.getMarkers(), m
+      if (current = @_dave.getMarkers()) instanceof Error
+        return current
+      @_dave.setMarkers bits.set current, m
 
   clearMarker: (m) ->
-    return null unless @isConnected
+    return new Error NOT_CONNECTED unless @isConnected
     if @_simulate
       @_simMarkers = bits.clear @_simMarkers, m
     else
-      @_dave.setMarkers bits.clear @_dave.getMarkers(), m
+      if (current = @_dave.getMarkers()) instanceof Error
+        return current
+      @_dave.setMarkers bits.clear current, m
 
   getMarker: (m) ->
-    return null unless @isConnected
+    return new Error NOT_CONNECTED unless @isConnected
     if @_simulate
       bits.test @_simMarkers, m
     else
-      bits.test @_dave.getMarkers(), m
+      if (current = @_dave.getMarkers()) instanceof Error
+        return current
+      bits.test current, m
 
   getMarkers: ->
-    return null unless @isConnected
+    return new Error NOT_CONNECTED unless @isConnected
     markers =
       if @_simulate then @_simMarkers
       else @_dave.getMarkers()
+
+    return markers if markers instanceof Error
+
     for i in [0...@markers]
       bits.test markers, i
 
   setSimulatedInput: (i) ->
-    return null unless @isConnected and @_simulate
+    return new Error NOT_CONNECTED unless @isConnected and @_simulate
     @_simInputs = bits.set @_simInputs, i
 
   clearSimulatedInput: (i) ->
-    return null unless @isConnected and @_simulate
+    return new Error NOT_CONNECTED unless @isConnected and @_simulate
     @_simInputs = bits.clear @_simInputs, i
 
   getInput: (i) ->
-    return null unless @isConnected
+    return new Error NOT_CONNECTED unless @isConnected
     if @_simulate
       bits.test @_simInputs, i
     else
-      bits.test @_dave.getInputs(), i
+      if (current = @_dave.getInputs()) instanceof Error
+        return current
+      bits.test current, i
 
   getInputs: ->
-    return null unless @isConnected
+    return new Error NOT_CONNECTED unless @isConnected
     inputs =
       if @_simulate then @_simInputs
       else @_dave.getInputs()
+    return inputs if inputs instanceof Error
     for i in [0...@inputs]
       bits.test inputs, i
 

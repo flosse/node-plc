@@ -27,9 +27,24 @@ myLogo.on("error", function(err){
 });
 
 myLogo.on("connect", function(){
-  myLogo.getInputs();   // [true, false, false, true, false, true]
-  myLogo.getMarkers();  // [true, false, true, true]
-  myLogo.setMarker(2, true);
+
+  var result = myLogo.getInputs();
+  if (result instanceof Error){
+    return console.error(result.message);
+  }
+  console.log(result); // [true, false, false, true, false, true]
+
+  result = myLogo.getMarkers();
+  if (result instanceof Error){
+    return console.error(result.message);
+  }
+  console.log(result); // [true, false, true, true]
+
+  result = myLogo.setMarker(2, true);
+  if (result instanceof Error){
+    return console.error(result.message);
+  }
+
   myLogo.disconnect();
 });
 

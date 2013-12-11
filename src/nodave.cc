@@ -97,7 +97,7 @@ Handle<Value> NoDave::connect(const Arguments& args)
   daveInterface*  di;
 
   if (args.Length() < 1 || !args[0]->IsNumber())
-    return ThrowException(Exception::TypeError(
+    return scope.Close(Exception::TypeError(
         String::New("First argument must be a file descriptor")));
 
   fd = args[0]->ToInteger()->Value();
@@ -118,10 +118,10 @@ Handle<Value> NoDave::connect(const Arguments& args)
     d->dc = daveNewConnection(di,2,rack,slot);
 
     if (daveConnectPLC(d->dc))
-      return ThrowException(Exception::Error(String::New("Could not connect")));
+      return scope.Close(Exception::Error(String::New("Could not connect")));
     return scope.Close(Undefined());
   }
-  return ThrowException(Exception::Error(String::New("Could not connect")));
+  return scope.Close(Exception::Error(String::New("Could not connect")));
 }
 
 Handle<Value> NoDave::getMarkers(const Arguments& args)
@@ -130,7 +130,8 @@ Handle<Value> NoDave::getMarkers(const Arguments& args)
   NoDave* d = ObjectWrap::Unwrap<NoDave>(args.This());
   int buff[] = { 0 };
   if (daveReadBytes(d->dc, daveFlags, 0,0, 1, &buff))
-    return scope.Close(Null());
+    return scope.Close(Exception::Error(
+      String::New("Could not read markers")));
   return scope.Close(Integer::New(buff[0]));
 }
 
@@ -140,15 +141,16 @@ Handle<Value> NoDave::setMarkers(const Arguments& args)
   int val;
 
   if (args.Length() < 1 || !args[0]->IsNumber() )
-    return ThrowException(Exception::TypeError(
+    return scope.Close(Exception::Error(
         String::New("First argument must be an integer")));
 
   val = args[0]->ToInteger()->Value();
   int buff[] = { val };
 
   NoDave* d = ObjectWrap::Unwrap<NoDave>(args.This());
-  if (daveWriteBytes(d->dc, daveFlags, 0,0, 1, &buff))
-    return scope.Close(Null());
+  if (daveWriteBytes(d->dc, daveFlags, 0, 0, 1, &buff))
+    return scope.Close(Exception::Error(
+      String::New("Could not set markers")));
   return scope.Close(Undefined());
 }
 
@@ -157,8 +159,9 @@ Handle<Value> NoDave::getInputs(const Arguments& args)
   HandleScope scope;
   int buff[] = { 0 };
   NoDave* d = ObjectWrap::Unwrap<NoDave>(args.This());
-  if (daveReadBytes(d->dc, daveInputs,0,0, 1, &buff))
-    return scope.Close(Null());
+  if (daveReadBytes(d->dc, daveInputs, 0, 0, 1, &buff))
+    return scope.Close(Exception::Error(
+      String::New("Could not read inputs")));
   return scope.Close(Integer::New(buff[0]));
 }
 
