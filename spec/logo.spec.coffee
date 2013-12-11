@@ -20,9 +20,9 @@ describe "logo", ->
       (expect (new @Logo "192.168.0.1", {inputs: 2}).inputs).toEqual 2
       (expect (new @Logo "192.168.0.1", {markers: 3}).markers).toEqual 3
 
-    it "uses 8 inputs and 4 markers as default config", ->
+    it "uses 8 inputs and 8 markers as default config", ->
       (expect (new @Logo "192.168.0.1").inputs).toEqual 8
-      (expect (new @Logo "192.168.0.1").markers).toEqual 4
+      (expect (new @Logo "192.168.0.1").markers).toEqual 8
 
   describe "Logo class", ->
 

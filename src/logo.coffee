@@ -14,7 +14,7 @@ class Logo extends ev.EventEmitter
     {@inputs, @markers, @timeout } = opt
     @_dave      = new dave.NoDave @ipAddress
     @inputs     ?= 8
-    @markers    ?= 4
+    @markers    ?= 8
     @_simulate  ?= opt.simulate
     if @_simulate
       @_simMarkers = 0
