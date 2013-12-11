@@ -49,9 +49,9 @@ class Logo extends ev.EventEmitter
         e = @_dave.connect @_socket._handle.fd, @timeout
         unless e instanceof Error
           @isConnected = true
-          @emit "connect"
+          setImmeditate => @emit "connect"
         else
-          @emit "error", e
+          setImmediate => @emit "error", e
         return e
 
     @_socket.connect 102, @ipAddress
