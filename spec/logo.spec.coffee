@@ -15,6 +15,7 @@ describe "logo", ->
       (-> new Logo "192.168.0.1", {}).should.not.throw()
       (new Logo "192.168.0.1", {inputs: 2}).inputs.should.equal 2
       (new Logo "192.168.0.1", {markers: 3}).markers.should.equal 3
+      (new Logo "192.168.0.1", {timeout: 500}).timeout.should.equal 500
 
     it "uses 8 inputs and 8 markers as default config", ->
       (new Logo "192.168.0.1").inputs.should.equal 8
