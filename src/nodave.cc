@@ -34,11 +34,11 @@ class NoDave: public ObjectWrap
 
   protected:
     NoDave(void);
-    static Handle<Value> New(const Arguments& args);
-    static Handle<Value> connect(const Arguments& args);
-    static Handle<Value> getMarkers(const Arguments& args);
-    static Handle<Value> setMarkers(const Arguments& args);
-    static Handle<Value> getInputs(const Arguments& args);
+    static Handle<Value> New        (const Arguments& args);
+    static Handle<Value> connect    (const Arguments& args);
+    static Handle<Value> getMarkers (const Arguments& args);
+    static Handle<Value> setMarkers (const Arguments& args);
+    static Handle<Value> getInputs  (const Arguments& args);
 };
 
 Persistent<FunctionTemplate> NoDave::constructor;
@@ -56,7 +56,7 @@ void NoDave::Init(Handle<Object> target)
   NODE_SET_PROTOTYPE_METHOD(constructor, "connect",    connect    );
   NODE_SET_PROTOTYPE_METHOD(constructor, "getMarkers", getMarkers );
   NODE_SET_PROTOTYPE_METHOD(constructor, "setMarkers", setMarkers );
-  NODE_SET_PROTOTYPE_METHOD(constructor, "getInputs",   getInputs );
+  NODE_SET_PROTOTYPE_METHOD(constructor, "getInputs",  getInputs  );
 
   // assign the template to 'NoDave' on the target
   target->Set(name, constructor->GetFunction());
