@@ -1,4 +1,9 @@
+try
+  v = require("../package.json").version
+catch e
+  v = undefined
+
 module.exports =
 
-  VERSION: '0.1.0'
+  VERSION: v
   Logo: require './logo'
