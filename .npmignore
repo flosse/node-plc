@@ -4,3 +4,5 @@ build/
 *.tmp
 .directory
 *.coffee
+coverage/
+test.cc
