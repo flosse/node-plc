@@ -45,11 +45,13 @@ extern "C" {
 typedef struct {
     int rfd;
     int wfd;
+//    int conType;	// remember whether this is a socket or a serial connection or a handle or whatever
 } _daveOSserialType;
 #include <stdlib.h>
 #else    
 #ifdef BCCWIN
 #define WIN32_LEAN_AND_MEAN
+#include <winsock2.h>
 #include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -63,6 +65,7 @@ typedef struct {
 typedef struct {
     HANDLE rfd;
     HANDLE wfd;
+//    int conType;
 } _daveOSserialType;
 #else
 #error Fill in what you need for your OS or API.
@@ -646,4 +649,7 @@ EXPORTSPEC uc DECL2 daveFromBCD(uc i);
     04/10/05  first version.
     09/11/05  added read/write functions for long blocks of data.
     10/26/07  fixed __cplusplus
+Version 0.8.5:
+    05/17/13  added include winsock2 for 46 bit compatibility.
+    05/17/13  added conType field to daveOSserialType
 */

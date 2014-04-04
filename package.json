@@ -3,6 +3,7 @@
   "version":      "0.1.2",
   "main":         "./lib/plc",
   "description":  "module to connect to PLCs",
+  "keywords":     ["plc","libnodave", "siemens", "logo"],
   "author":       "Markus Kohlhase <mail@markus-kohlhase.de>",
   "licenses":     [{"type": "LGPL"}],
   "engines":
@@ -16,9 +17,9 @@
   "devDependencies":
   {
     "node-gyp":       "*",
-    "mocha":          "~1.15.1",
-    "chai":           "~1.8.1",
-    "coffee-script":  "~1.6.3"
+    "mocha":          "~1.18.2",
+    "chai":           "~1.9.1",
+    "coffee-script":  "~1.7.1"
   },
   "repository":
   {
@@ -30,6 +31,6 @@
   {
     "install":    "node-gyp configure build",
     "prepublish": "coffee -c -o lib/ src/*.coffee",
-    "test":       "npm install && ./node_modules/.bin/mocha --reporter spec --compilers coffee:coffee-script spec/*.spec.coffee"
+    "test":       "npm install && ./node_modules/.bin/mocha --reporter spec --compilers coffee:coffee-script/register spec/*.spec.coffee"
   }
 }
