@@ -6,3 +6,4 @@ build/
 *.coffee
 coverage/
 test.cc
+spec/

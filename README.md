@@ -15,6 +15,11 @@ npm install --save plc
 
 ```javascript
 var plc  = require("plc");
+```
+
+### Logo class
+
+```javascript
 
 var myLogo = new plc.Logo("192.168.0.1", {
   markers: 6,   // default is 8
@@ -86,6 +91,92 @@ myLogo.on("connect", function(){
 myVirtualLogo.connect();
 ```
 
+### Comfort features
+
+The LOGO! can be configured with state and action schemata.
+A states could be described like this:
+
+```javascript
+var myStates = {
+  stateOne:   { input:  0 },
+  stateTwo:   { marker: 2 },
+  stateThree: { input:  2 }
+};
+```
+
+An action consists of an array with defined desired states:
+
+```javascript
+var actions = {
+  actionOne:
+    [
+      { type: 'clear', marker: 1 },
+      { type: 'set',   marker: 3 }
+    ],
+  actionTwo:
+    [ { type: 'set', marker: 2 } ],
+  actionThree:
+    [ { type: 'alias', actions: ['actionOne','actionTwo'] } ]
+};
+```
+
+This is a full example:
+
+```javascript
+var config = {
+  timeout:  500   // connection timeout
+  interval: 250   // read state interval
+  states: {
+    x:   { input:  0 },
+    y:   { input:  2 },
+    foo: { marker: 0 },
+    bar: { input:  1 }
+  actions: {
+    switchOne:
+      [
+        { type: 'set', marker: 3 }
+      ],
+    switchTwo:
+      [
+        { type: 'set',   marker:   1             },
+        { type: 'alias', switches: ['switchOne'] }
+      ]
+    }
+  }
+};
+
+var dev1 = new Device("192.168.0.201", config);
+
+dev1.on("connect", function(){
+  console.log("Device 1 connected");
+});
+
+dev1.on("timeout", function(){
+  console.log("Device 1 connection timeout occoured");
+});
+
+dev1.on("disconnect", function(){
+  console.log("Device 1 disconnected");
+});
+
+dev1.on("error", function(err){
+  console.error("something went wrong: ", err.message);
+});
+
+dev.on('state-change', function(state){
+  console.log(state);
+  // { x: true, y: false, foo: true, bar: false }
+});
+
+dev1.connect();
+dev1.startWatching();
+
+// ...
+
+dev1.stopWatching();
+dev1.disconnect();
+```
+
 ### API
 
 #### Constructor
@@ -101,18 +192,35 @@ Following options are available
 - `simulate` - simulation mode
 - `timeout` - the socket timeout
 
+#### Properties
+
+- `ip`
+- `isConnected`
+
 #### Methods
 
 - `connect()`
 - `disconnect()`
+
 - `setMarker(nr)`
 - `clearMarker(nr)`
 - `getMarker(nr)`
 - `getMarkers()`
+
 - `getInput(nr)`
 - `getInputs()`
+
 - `setSimulatedInput(nr)`
 - `clearSimulatedInput(nr)`
+
+- `getState()`
+- `setSimulatedState(stateName, value)`
+- `setVirtualState(stateName, value)`
+- `triggerAction(action)`
+
+- `startWatching`
+- `stopWatching`
+
 
 #### Events
 
@@ -120,6 +228,8 @@ Following options are available
 - `connect`
 - `disconnect`
 - `timeout`
+- `state`
+- `state-change`
 
 ## Test
 
