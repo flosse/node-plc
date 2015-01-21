@@ -180,7 +180,8 @@ class Logo extends ev.EventEmitter
     s
 
   triggerAction: (action) ->
-    return console.warn "invalid action: #{action}" unless typeof action is 'string'
+    unless typeof action is 'string'
+      return console.warn "invalid action: #{action}"
     tasks = @_actionConfig[action]
     return unless tasks? and @isConnected
     for t in tasks
@@ -204,7 +205,8 @@ class Logo extends ev.EventEmitter
 
   startWatching: (interval) ->
     unless @_stateIntervalTimer?
-      @_stateIntervalTimer = setInterval @_onStateInterval, interval or @interval
+      @_stateIntervalTimer =
+        setInterval @_onStateInterval, interval or @interval
     unless @_connIntervalTimer?
       @_connIntervalTimer  = setInterval @_onConnectInterval, 8000
 

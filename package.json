@@ -1,36 +1,42 @@
 {
-  "name":         "plc",
-  "version":      "0.2.0",
-  "main":         "./lib/plc",
-  "description":  "module to connect to PLCs",
-  "keywords":     ["plc","libnodave", "siemens", "logo"],
-  "author":       "Markus Kohlhase <mail@markus-kohlhase.de>",
-  "licenses":     [{"type": "LGPL"}],
-  "engines":
-  {
-    "node":       ">=0.10.x"
+  "name": "plc",
+  "version": "0.2.0",
+  "main": "./lib/plc",
+  "description": "module to connect to PLCs",
+  "keywords": [
+    "plc",
+    "libnodave",
+    "siemens",
+    "logo"
+  ],
+  "author": "Markus Kohlhase <mail@markus-kohlhase.de>",
+  "licenses": [
+    {
+      "type": "LGPL"
+    }
+  ],
+  "engines": {
+    "node": ">=0.10.x"
   },
-  "dependencies":
-  {
-    "bits":       "~0.1.1"
+  "dependencies": {
+    "bits": "~0.1.1"
   },
-  "devDependencies":
-  {
-    "node-gyp":       "~1.0.2",
-    "mocha": "~2.1.0",
+  "devDependencies": {
     "chai": "~1.10.0",
-    "coffee-script":  "~1.8.0"
+    "coffee-script": "~1.8.0",
+    "coffeelint": "^1.8.1",
+    "mocha": "~2.1.0",
+    "node-gyp": "~1.0.2"
   },
-  "repository":
-  {
+  "repository": {
     "type": "git",
-    "url":  "git://github.com/flosse/node-plc.git"
+    "url": "git://github.com/flosse/node-plc.git"
   },
-  "bugs":   "http://github.com/flosse/node-plc/issues",
-  "scripts":
-  {
-    "install":    "node-gyp configure build",
+  "bugs": "http://github.com/flosse/node-plc/issues",
+  "scripts": {
+    "lint": "coffeelint src/",
+    "install": "node-gyp configure build",
     "prepublish": "coffee -c -o lib/ src/*.coffee",
-    "test":       "npm install && ./node_modules/.bin/mocha --reporter spec --compilers coffee:coffee-script/register spec/*.spec.coffee"
+    "test": "npm run lint & npm install && ./node_modules/.bin/mocha --reporter spec --compilers coffee:coffee-script/register spec/*.spec.coffee"
   }
 }
