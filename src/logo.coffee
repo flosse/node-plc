@@ -13,6 +13,8 @@ NOT_CONNECTED = "plc is not connected"
 class Logo extends ev.EventEmitter
 
   constructor: (@ip, opt={}) ->
+    unless typeof @ip is "string"
+      throw new Error "invalid ip address"
 
     { @inputs, @markers, @timeout, @interval } = opt
 

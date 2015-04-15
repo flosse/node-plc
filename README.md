@@ -201,26 +201,20 @@ Following options are available
 
 - `connect()`
 - `disconnect()`
-
 - `setMarker(nr)`
 - `clearMarker(nr)`
 - `getMarker(nr)`
 - `getMarkers()`
-
 - `getInput(nr)`
 - `getInputs()`
-
 - `setSimulatedInput(nr)`
 - `clearSimulatedInput(nr)`
-
 - `getState()`
 - `setSimulatedState(stateName, value)`
 - `setVirtualState(stateName, value)`
 - `triggerAction(action)`
-
 - `startWatching`
 - `stopWatching`
-
 
 #### Events
 

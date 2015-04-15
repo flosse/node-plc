@@ -1,5 +1,5 @@
 should = require("chai").should()
-nodave = require("../build/Release/addon").NoDave
+nodave = (require "bindings")("addon").NoDave
 
 describe "nodave", ->
 
@@ -7,12 +7,6 @@ describe "nodave", ->
 
   it "is a class", ->
     nodave.should.be.a.function
-
-  it "takes an IP-Address as constructor argument", ->
-    (-> new nodave).should.throw()
-    (-> new nodave "192.168.0.1").should.not.throw()
-    (-> new nodave "x").should.throw()
-    (-> new nodave "192.168.234.2011").should.throw()
 
   describe "class", ->
 

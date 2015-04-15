@@ -1,6 +1,6 @@
 {
   "name": "plc",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "./lib/plc",
   "description": "module to connect to PLCs",
   "keywords": [
@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "chai": "~2.2.0",
-    "coffee-script": "~1.9.1",
+    "coffee-script": "~1.9.2",
     "coffeelint": "^1.9.3",
     "mocha": "~2.2.4",
     "node-gyp": "~1.0.3"

@@ -43,19 +43,8 @@ NAN_METHOD(NoDave::New) {
   NanScope();
 
   if (args.IsConstructCall()) {
-
     // Invoked as constructor: `new NoDave(...)`
-
-    if (args.Length() < 1 || !args[0]->IsString())
-      return NanThrowError("First argument must be an IP-Adress");
-
-    NanUtf8String *str = new NanUtf8String(args[0]);
-
-    if (str->length() < 7 || str->length() > 15)
-      return NanThrowError("Invalid IP-Adress");
-
     NoDave* obj = new NoDave();
-    obj->ipAddress = str;
     obj->Wrap(args.This());
     NanReturnValue(args.This());
   } else {
