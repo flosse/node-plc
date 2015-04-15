@@ -5,7 +5,7 @@ Copyright (c) 2012 - 2015, Markus Kohlhase <mail@markus-kohlhase.de>
 fs   = require "fs"
 net  = require "net"
 ev   = require "events"
-dave = require "../build/Release/nodave"
+dave = (require "bindings") 'addon'
 bits = require "bits"
 
 NOT_CONNECTED = "plc is not connected"

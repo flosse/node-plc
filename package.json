@@ -18,15 +18,18 @@
   "engines": {
     "node": ">=0.10.x"
   },
+  "gypfile": true,
   "dependencies": {
-    "bits": "~0.1.1"
+    "bindings": "^1.2.1",
+    "bits": "~0.1.1",
+    "nan": "^1.7.0"
   },
   "devDependencies": {
-    "chai": "~1.10.0",
-    "coffee-script": "~1.8.0",
-    "coffeelint": "^1.8.1",
-    "mocha": "~2.1.0",
-    "node-gyp": "~1.0.2"
+    "chai": "~2.2.0",
+    "coffee-script": "~1.9.1",
+    "coffeelint": "^1.9.3",
+    "mocha": "~2.2.4",
+    "node-gyp": "~1.0.3"
   },
   "repository": {
     "type": "git",
@@ -37,6 +40,6 @@
     "lint": "coffeelint src/",
     "install": "node-gyp configure build",
     "prepublish": "coffee -c -o lib/ src/*.coffee",
-    "test": "npm run lint & npm install && ./node_modules/.bin/mocha --reporter spec --compilers coffee:coffee-script/register spec/*.spec.coffee"
+    "test": "npm run lint & npm install && mocha --reporter spec --compilers coffee:coffee-script/register spec/*.spec.coffee"
   }
 }

@@ -1,5 +1,5 @@
 should = require("chai").should()
-nodave = require("../build/Release/nodave").NoDave
+nodave = require("../build/Release/addon").NoDave
 
 describe "nodave", ->
 
