@@ -3,14 +3,7 @@ let
   stdenv  = pkgs.stdenv;
   lib     = pkgs.lib;
 
-  nodePackages = import "${pkgs.path}/pkgs/top-level/node-packages.nix" {
-    inherit pkgs;
-    inherit (pkgs) stdenv nodejs fetchurl fetchgit;
-    neededNatives = [
-        pkgs.which
-        pkgs.python
-        pkgs.pkgconfig
-      ] ++ pkgs.lib.optional pkgs.stdenv.isLinux pkgs.utillinux;
+  nodePackages = pkgs.nodePackages.override {
     self = nodePackages;
     generated = ./node-packages.nix;
   };
@@ -18,20 +11,19 @@ let
 in rec {
   devEnv = stdenv.mkDerivation rec {
     name = "dev-env";
-    version = "0.1";
     src = ./.;
-    buildInputs = [
+    buildInputs = with nodePackages; [
       pkgs.utillinux
       pkgs.python
       stdenv
       pkgs.nodejs
-      nodePackages.nan
-      nodePackages.bindings
-      nodePackages.bits
-      nodePackages.chai
-      nodePackages.mocha
-      nodePackages.node-gyp
-      nodePackages.coffee-script
+      nan
+      bindings
+      bits
+      chai
+      mocha
+      node-gyp
+      coffee-script
     ];
   };
 }
