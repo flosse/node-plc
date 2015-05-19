@@ -96,7 +96,7 @@ NAN_METHOD(NoDave::GetMarkers) {
   NanScope();
   NoDave* d = ObjectWrap::Unwrap<NoDave>(args.Holder());
   int buff[] = { 0 };
-  if (daveReadBytes(d->dc, daveFlags, 0,0, 1, &buff))
+  if (daveReadBytes(d->dc, daveFlags, 0,0, 2, &buff))
       NanReturnValue(v8::Exception::Error(NanNew<String>("Could not read markers")));
   NanReturnValue(NanNew<Integer>(buff[0]));
 }
@@ -111,7 +111,7 @@ NAN_METHOD(NoDave::SetMarkers) {
   int buff[] = { val };
 
   NoDave* d = ObjectWrap::Unwrap<NoDave>(args.Holder());
-  if (daveWriteBytes(d->dc, daveFlags, 0, 0, 1, &buff))
+  if (daveWriteBytes(d->dc, daveFlags, 0, 0, 2, &buff))
     NanReturnValue(v8::Exception::Error(NanNew<String>("Could not set markers")));
   NanReturnUndefined();
 }
