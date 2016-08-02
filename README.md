@@ -230,3 +230,7 @@ Following options are available
 ```
 npm test
 ```
+
+## License
+
+This project is licensed under the LGPL license.
