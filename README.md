@@ -1,7 +1,7 @@
 # node-plc
 
 Node.js module to communicate with PLCs.
-At the moment only the Siemens LOGO! PLC is supported.
+At the moment only the Siemens LOGO! PLC (`0BA7`and `0BA8`) is supported.
 
 [![Build Status](https://secure.travis-ci.org/flosse/node-plc.png)](http://travis-ci.org/flosse/node-plc)
 [![Dependency Status](https://gemnasium.com/flosse/node-plc.png)](https://gemnasium.com/flosse/node-plc)
@@ -14,7 +14,7 @@ npm install --save plc
 ```
 
 ```javascript
-var plc  = require("plc");
+var plc = require("plc");
 ```
 
 ### Logo class
