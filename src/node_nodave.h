@@ -9,10 +9,10 @@
 
 #include <nan.h>
 
-class NoDave : public node::ObjectWrap {
+class NoDave : public Nan::ObjectWrap {
 
   public:
-    static void Init(v8::Handle<v8::Object> exports);
+    static NAN_MODULE_INIT(Init);
 
   private:
     explicit NoDave(void);
@@ -24,7 +24,7 @@ class NoDave : public node::ObjectWrap {
     static NAN_METHOD(SetMarkers);
     static NAN_METHOD(GetInputs);
 
-    static v8::Persistent<v8::Function> constructor;
+    static Nan::Persistent<v8::Function> constructor;
 
     daveConnection* dc;
     _daveOSserialType fds;
