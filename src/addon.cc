@@ -3,8 +3,8 @@
 
 using namespace v8;
 
-void InitAll(Handle<Object> exports) {
-  NoDave::Init(exports);
+NAN_MODULE_INIT(InitAll) {
+  NoDave::Init(target);
 }
 
 NODE_MODULE(addon, InitAll)
