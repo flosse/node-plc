@@ -1,5 +1,5 @@
 ###
-Copyright (c) 2012 - 2015, Markus Kohlhase <mail@markus-kohlhase.de>
+Copyright (c) 2012 - 2017, Markus Kohlhase <mail@markus-kohlhase.de>
 ###
 
 fs   = require "fs"

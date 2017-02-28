@@ -1,5 +1,5 @@
 /*******************************************************************************
- *    Copyright (c) 2012 - 2016, Markus Kohlhase <mail@markus-kohlhase.de>     *
+7*    Copyright (c) 2012 - 2017, Markus Kohlhase <mail@markus-kohlhase.de>     *
  ******************************************************************************/
 
 #include "node_nodave.h"
