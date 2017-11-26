@@ -218,7 +218,16 @@ class Logo extends ev.EventEmitter
 
   _onStateInterval: =>
     return unless @isConnected
-    s      = @getState()
+	### Simulate change of inputs ###
+	if @simulate
+		for i in [0...@inputs]
+			rand = Math.random();
+			if (rand >= 0.5)
+				@setSimulatedInput i
+			else
+				@clearSimulatedInput i
+
+	s      = @getState()
     change = false
 
     @_onInterval s
