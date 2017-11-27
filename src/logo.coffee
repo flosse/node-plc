@@ -24,6 +24,7 @@ class Logo extends ev.EventEmitter
     @markers      ?= 8
     @interval     ?= 250
     @simulate     ?= opt.simulate
+    @randomInputs ?= opt.randomInputs
     @state         = {}
 
     ### private properties ###
@@ -218,6 +219,16 @@ class Logo extends ev.EventEmitter
 
   _onStateInterval: =>
     return unless @isConnected
+    ### Simulate change of inputs ###
+    if @simulate
+        if @randomInputs
+            for i in [0...@inputs]
+                rand = Math.random();
+                if (rand >= 0.5)
+                    @setSimulatedInput i
+                else
+                    @clearSimulatedInput i
+
     s      = @getState()
     change = false
 
